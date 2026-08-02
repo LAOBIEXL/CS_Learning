@@ -223,24 +223,126 @@
 //    for(int i = 0; i < n; i++)
 //    {
 //         cin >> a[i];
-//         maxa = max(a[i], maxa);
-//         mina = min(a[i], mina);
 //    }
 //    for(int i = 0;i  < m; i++)
 //    {
 //         cin >> b[i];
-//         maxb = max(maxb, b[i]);
-//         minb = min(minb, b[i]);
 //    }
-//    if(maxa < maxb || mina > minb)
+//    if(n < m * 2)
 //    {
-//      cout << "NO" << endl;
+//     cout << "NO" << endl;
+//     return;
 //    }
-//    else
+//    sort(a.begin(),a.end());
+//    sort(b.begin(),b.end());
+//    for(int i = 0; i < m; i++)
 //    {
-//     cout << "YES" << endl;
+//     if(b[i] < a[i] || b[i] > a[n - m + i])
+//     {
+//         cout << "NO" << endl;
+//         return;
+//     }
 //    }
+//    cout << "YES" << endl;
+//    return;
 
+
+// }
+
+// int main()
+// {
+//     int t;
+//     cin >> t;
+//     while(t--)
+//     {
+//         solve();
+//     }
+//     return 0;
+// }
+
+// #include<bits/stdc++.h>
+// using namespace std;
+
+// void solve()
+// {
+//     int n, m;
+//     cin >> n >> m;
+//     vector<int> a(n);
+//     vector<int> b(m);
+//     for(int i = 0; i < n; i++)
+//     {
+//         cin >> a[i];
+//     }
+//     for(int i = 0; i < m; i++)
+//     {
+//         cin >> b[i];
+//     }
+
+//     if(n < 2 * m)
+//     {
+//         cout << "NO" << endl;
+//         return;
+//     }
+
+//     sort(a.begin(), a.end());
+//     sort(b.begin(), b.end());
+
+//     for(int i = 0; i < m; i++)
+//     {
+//         if(a[i] >= b[i] || a[n - m + i] <= b[i])
+//         {
+//             cout << "NO" << endl;
+//             return;
+//         }
+//     }
+
+//     cout << "YES" << endl;
+// }
+
+// int main()
+// {
+//     int t;
+//     cin >> t;
+//     while(t--)
+//     {
+//         solve();
+//     }
+//     return 0;
+// }
+
+// #include<bits/stdc++.h>
+// using namespace std;
+
+// void solve()
+// {
+//     int n;
+//     cin >> n;
+//     vector<int> a(2 * n + 1);
+//     vector<int> pos(n + 1);
+//     vector<long long> dp(2 * n + 1);
+
+//     for(int i = 1; i <= 2 * n; i++)
+//     {
+//         cin >> a[i];
+//     }
+
+//     for(int i = 1; i <= 2 * n; i++)
+//     {
+//         dp[i] = dp[i - 1] + 1;
+
+//         if(pos[a[i]] == 0)
+//         {
+//             pos[a[i]] = i;
+//         }
+//         else
+//         {
+//             int p = pos[a[i]];
+//             long long len = i - p + 1;
+//             dp[i] = max(dp[i], dp[p - 1] + len * len);
+//         }
+//     }
+
+//     cout << dp[2 * n] << endl;
 // }
 
 // int main()
@@ -259,38 +361,34 @@ using namespace std;
 
 void solve()
 {
-    int n, m;
-    cin >> n >> m;
-    vector<int> a(n);
-    vector<int> b(m);
-    for(int i = 0; i < n; i++)
+    int n;
+    cin >> n;
+    vector<int> a(2 * n + 1);
+    for(int i = 1; i <= 2 * n ; i++)
     {
         cin >> a[i];
     }
-    for(int i = 0; i < m; i++)
-    {
-        cin >> b[i];
-    }
+    vector<int> dp(2 * n + 1);
+    dp[0] = 0;
+    map<int, int> st;
+    map<int, int> pos;
 
-    if(n < 2 * m)
+    for(int i = 1; i <= 2 * n ; i++)
     {
-        cout << "NO" << endl;
-        return;
-    }
-
-    sort(a.begin(), a.end());
-    sort(b.begin(), b.end());
-
-    for(int i = 0; i < m; i++)
-    {
-        if(a[i] >= b[i] || a[n - m + i] <= b[i])
+        if(st[a[i]])
         {
-            cout << "NO" << endl;
-            return;
+            dp[i] = max(dp[i - 1] + 1,(i -  pos[a[i]] + 1) *(i -  pos[a[i]] + 1) + dp[pos[a[i]] - 1] );
+        }
+        else{
+            dp[i] = 1 + dp[i - 1];
+        }
+        st[a[i]]++;
+        if(st[a[i]] == 1)
+        {
+            pos[a[i]] = i;
         }
     }
-
-    cout << "YES" << endl;
+    cout << dp[2 * n] << endl;
 }
 
 int main()

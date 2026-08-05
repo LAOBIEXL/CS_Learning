@@ -156,10 +156,11 @@ int main()
             mp[t] += m;
         }
     }
+    sort(diff.begin(), diff.end());
     diff.erase(unique(diff.begin(), diff.end()),diff.end());
     ll ret_f = ret;
     ll last = 0;
-    sort(diff.begin(), diff.end());
+
     if(n & 1 == 1)
     {
         for(int i = 0; i < diff.size(); i++)

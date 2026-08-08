@@ -197,19 +197,19 @@ int main()
     vector<vector<int>> dist(n , vector<int>(m, INF));//初始化为最大，因为01bfs需要多次比较
     dist[x1][y1] = 0;
     q.push_back({x1, y1});
-    map<pair<int, int>, int> done;
+    vector<vector<int>> done(n, vector<int>(m));
     while(!q.empty())
     {
         auto [u, v] = q.front();
         q.pop_front();
-        if(done.count({u, v})) continue;
-        done[{u, v}] = 1;
+        if(done[u][v]) continue;
+        done[u][v] = 1;
         for(int d = 0; d < 4; d++)
         {
             int xx = u + dx[d];
             int yy = v + dy[d];
             if(xx < 0 || xx >= n || yy < 0 || yy >= m) continue;
-            int w = 1;
+            int w = 1; //计算权值
             if(a[xx][yy] == a[u][v])
             {
                 w = 0;
@@ -229,6 +229,7 @@ int main()
 
         }
     }
+    cout << dist[x2][y2] << endl;
 
 
 

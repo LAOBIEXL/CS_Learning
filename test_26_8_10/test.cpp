@@ -52,7 +52,7 @@
 //             if(j >= v[i])
 //             {
 //                 dp[i][j] = max(dp[i - 1][j] , w[i] + dp[i][j - v[i]]);
-//             }
+//             } 
 //         }
 //     }
 //     cout << dp[n][vo] << endl;
@@ -76,7 +76,7 @@
 //     }
 
 
-
+    
 //     return 0;
 // }
 
@@ -102,9 +102,9 @@
 //     {
 //         for(int j = v[i];j <= vo;j ++)
 //         {
-
+           
 //                 dp[j] = max(dp[j] , w[i] + dp[j - v[i]]);
-
+            
 //         }
 //     }
 //     cout << dp[vo] << endl;
@@ -114,9 +114,9 @@
 //     {
 //         for(int j = v[i];j <= vo;j++)
 //         {
-
+          
 //                 dp[j] = max(dp[j] , w[i] + dp[j - v[i]]);
-
+            
 //         }
 //     }
 //     if(dp[vo] > 0) cout << dp[vo] << endl;
@@ -126,7 +126,7 @@
 //     }
 
 
-
+    
 //     return 0;
 // }
 
@@ -144,7 +144,7 @@
 //     long long ret = 1;
 //     while(b > 0)
 //     {
-//         if(b & 1)
+//         if(b & 1) 
 //         {
 //             ret = ret * a % MOD;
 //         }
@@ -193,7 +193,7 @@
 //         {
 //             for(auto e : mp)
 //             {
-//                 ret = (ret * qpow(2, e.second - 1)) % MOD;
+//                 ret = (ret * qpow(2, e.second - 1)) % MOD;    
 //             }
 //             ll tmp = 1;
 //             for(auto e : mp)
@@ -206,7 +206,7 @@
 //         {
 //             for(auto e : mp)
 //             {
-//                 ret = (ret * qpow(2, e.second - 1)) % MOD;
+//                 ret = (ret * qpow(2, e.second - 1)) % MOD;    
 //             }
 //         }
 //         cout << ret << endl;
@@ -218,35 +218,105 @@
 // }
 
 
+// #include<bits/stdc++.h>
+// using namespace std;
+// using ll = long long;
+
+// int main()
+// {       
+//     int t, m;
+//     cin >> t >> m;
+//    vector<ll> dp(t + 1, 0);
+//     vector<int> v(m + 1);
+//     vector<int> w(m + 1);
+//     for(int i = 1;i <= m; i++)
+//     {
+//         cin >> v[i];
+//         cin >> w[i];
+//     }
+//     for(int i = 1; i <= m; i++)
+//     {
+//         for(int j = v[i];j <= t; j++)
+//         {
+          
+//                 dp[j] = max(dp[j - v[i]] + w[i], dp[j]);
+         
+//         }
+//     }
+//     cout << dp[t] << endl;
+
+
+
+
+
+//     return 0;
+// }
+
+// #include<bits/stdc++.h>
+// using namespace std;
+// using ll = long long;
+
+// int main()
+// {       
+//     int t, m;
+//     cin >> t >> m;
+//    vector<ll> dp(t + 1, 0);
+//     vector<int> v(m + 1);
+//     vector<int> w(m + 1);
+//     for(int i = 1;i <= m; i++)
+//     {
+//         cin >> v[i];
+//         cin >> w[i];
+//     }
+//     for(int i = 1; i <= m; i++)
+//     {
+//         for(int j = v[i];j <= t; j++)
+//         {
+          
+//                 dp[j] = max(dp[j - v[i]] + w[i], dp[j]);
+         
+//         }
+//     }
+//     cout << dp[t] << endl;
+
+
+
+
+
+//     return 0;
+// }
+
 #include<bits/stdc++.h>
 using namespace std;
-
-
+const int N = 5e4 + 10;
+using ll = long long;
 int main()
 {
-    int t, m;
-    cin >> t >> m;
-    vector<vector<int>> dp(m + 1 , vector<int>(t + 1, 0));
-    vector<int> v(m + 1);
-    vector<int> w(m + 1);
-    for(int i = 1;i <= m; i++)
+    int n, h;
+    cin >> n >> h;
+    vector<ll> dp(h + 1, 0x3f3f3f3f);
+    dp[0] = 0;
+    vector<int> v(n + 1);
+    vector<int> w(n + 1);
+    for(int i = 1;i <= n;i ++)
     {
-        cin >> v[i];
-        cin >> w[i];
+        cin >> v[i] >> w[i];
     }
-    for(int i = 1; i <= m; i++)
+    for(int i = 1;i <= n; i++)
     {
-        for(int j = 0;j <= t; j++)
+        for(int j = 0;j <= h; j++)
         {
-            dp[i][j] = dp[i - 1][j];
-            if(j >= v[i])
+            if(j < v[i])
             {
-                dp[i][j] = max(dp[i][j - v[i]] + w[i], dp[i][j]);
+                dp[j] = min(dp[j], dp[0] + w[i]);
+            }
+            else
+            {
+                dp[j] = min(dp[j], dp[j - v[i]] + w[i]);
             }
         }
     }
-    cout << dp[m][t] << endl;
-
+    cout << dp[h] << endl; 
 
 
 

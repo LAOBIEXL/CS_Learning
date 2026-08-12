@@ -240,48 +240,48 @@
 // }
 
 
-#include<bits/stdc++.h>
-using namespace std;
-using ll = long long;
-int main()
-{
-    ll n , t;
-    cin >>n >> t;
-    vector<ll> a(n );
-    for(int i = 0; i < n;i++)
-    {
-        cin >> a[i];
-    }
-    ll pos1 = 0;
-    ll pos2 = 0;
-    ll cnt = 0;
-    ll ret = 0;
-    while(pos1 <= n)
-    {
-        cnt += a[pos2 % n];
-        if(cnt <= t)
-        {
-            ll diff = abs((pos2 ) - pos1) + 1;
-            ret = max(ret, diff );
-            cout << "pos1 " << pos1 << " " << "pos2 " << pos2 <<  " " << ret << endl;
+// #include<bits/stdc++.h>
+// using namespace std;
+// using ll = long long;
+// int main()
+// {
+//     ll n , t;
+//     cin >>n >> t;
+//     vector<ll> a(n );
+//     for(int i = 0; i < n;i++)
+//     {
+//         cin >> a[i];
+//     }
+//     ll pos1 = 0;
+//     ll pos2 = 0;
+//     ll cnt = 0;
+//     ll ret = 0;
+//     while(pos2 < n)
+//     {
+//         cnt += a[pos2];
+//         if(cnt <= t)
+//         {
+//             ll diff = pos2  - pos1 + 1;
+//             ret = max(ret, diff );
+//             //cout << "pos1 " << pos1 << " " << "pos2 " << pos2 <<  " " << ret << endl;
           
-        }
-        else
-        {
-            while(cnt > t)
-            {
-                cnt -= a[pos1 % n];
-                pos1++;
-            }
-           ll diff = abs((pos2) - pos1) + 1;
-            ret = max(ret, diff );
-            cout << "pos1 " << pos1 << " " << "pos2 " << pos2 << " " << ret << endl;
-        }
-        pos2++;
-    }
-    cout << ret << endl;
+//         }
+//         else
+//         {
+//             while(cnt > t)
+//             {
+//                 cnt -= a[pos1];
+//                 pos1++;
+//             }
+//            ll diff = pos2 - pos1 + 1;
+//             ret = max(ret, diff );
+//             //cout << "pos1 " << pos1 << " " << "pos2 " << pos2 << " " << ret << endl;
+//         }
+//         pos2++;
+//     }
+//     cout << ret << endl;
 
 
 
-    return 0;
-}
+//     return 0;
+// }
